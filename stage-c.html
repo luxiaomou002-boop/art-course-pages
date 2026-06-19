@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <title>综合绘画班｜有趣儿童美学</title>
+  <style>
+    :root { --yellow:#FFE000; --blue:#1A3EBF; --ink:#151515; --muted:#62666f; --line:#e6e8ef; --soft:#f7f8fb; --white:#fff; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--soft); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; line-height:1.75; letter-spacing:0; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    a { color:inherit; text-decoration:none; }
+    .stage-nav { position:sticky; top:0; z-index:10; background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+    .stage-strip { display:flex; gap:8px; max-width:780px; margin:0 auto; padding:10px 14px; overflow-x:auto; scrollbar-width:none; }
+    .stage-strip::-webkit-scrollbar,.gallery-track::-webkit-scrollbar { display:none; }
+    .stage-tab { flex:0 0 auto; min-width:72px; padding:8px 12px; border:1px solid var(--line); border-radius:8px; color:#32343a; background:#fff; font-size:14px; font-weight:700; text-align:center; }
+    .stage-tab.is-active { border-color:var(--blue); background:var(--blue); color:#fff; }
+    .intro { background:var(--yellow); border-bottom:4px solid var(--blue); }
+    .inner { width:100%; max-width:780px; margin:0 auto; padding:28px 18px; }
+    .brand-mark { display:inline-flex; align-items:center; gap:8px; margin-bottom:18px; color:var(--blue); font-size:13px; font-weight:900; letter-spacing:.08em; }
+    .brand-mark::before { content:""; width:16px; height:16px; background:var(--blue); border-radius:3px; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin-bottom:10px; color:var(--blue); font-size:clamp(30px,9vw,52px); line-height:1.05; font-weight:950; }
+    h2 { display:flex; align-items:center; gap:10px; margin:0 0 16px; font-size:22px; line-height:1.25; font-weight:900; }
+    h2::before { content:""; width:8px; height:24px; border-radius:2px; background:var(--blue); }
+    h3 { margin-bottom:8px; font-size:18px; line-height:1.35; font-weight:900; }
+    p { margin-bottom:14px; }
+    .lead { margin-bottom:18px; font-size:18px; font-weight:800; line-height:1.55; }
+    .meta-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:18px; }
+    .meta-item { min-width:0; padding:10px 8px; border:1px solid rgba(26,62,191,.24); border-radius:8px; background:rgba(255,255,255,.45); }
+    .meta-label { display:block; color:var(--blue); font-size:12px; font-weight:900; }
+    .meta-value { display:block; margin-top:2px; font-size:13px; font-weight:800; line-height:1.35; }
+    .intro-block { margin-top:26px; } .intro-block + .intro-block { padding-top:22px; border-top:1px solid rgba(26,62,191,.22); }
+    .content-section { background:#fff; border-bottom:1px solid var(--line); }
+    .section-note { padding:14px 16px; border-left:4px solid var(--yellow); background:#fffceb; color:#20222a; font-weight:800; }
+    .unit-list { display:grid; gap:10px; margin-top:14px; }
+    details.unit { border:1px solid var(--line); border-radius:8px; background:#fff; overflow:hidden; }
+    .unit summary { position:relative; display:block; min-height:72px; padding:14px 44px 14px 14px; cursor:pointer; list-style:none; }
+    .unit summary::-webkit-details-marker { display:none; }
+    .unit summary::after { content:"+"; position:absolute; top:16px; right:16px; width:22px; height:22px; border-radius:50%; background:var(--yellow); color:var(--blue); font-weight:950; line-height:22px; text-align:center; }
+    .unit[open] summary::after { content:"-"; }
+    .unit-title { display:block; color:var(--blue); font-size:17px; font-weight:950; line-height:1.25; }
+    .unit-brief { display:block; margin-top:5px; color:var(--muted); font-size:14px; line-height:1.45; }
+    .unit-detail { padding:0 14px 16px; color:#2d3037; font-size:15px; }
+    .gallery { margin-top:18px; }
+    .gallery-track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+    .art-card { flex:0 0 100%; display:grid; place-items:center; aspect-ratio:4/3; border:1px solid #dfe4ff; border-radius:8px; background:linear-gradient(135deg,rgba(255,224,0,.28),rgba(255,255,255,.82)),repeating-linear-gradient(0deg,rgba(26,62,191,.06) 0 1px,transparent 1px 18px); color:var(--blue); scroll-snap-align:start; }
+    .art-card span { padding:8px 12px; border:1px solid rgba(26,62,191,.25); border-radius:8px; background:rgba(255,255,255,.72); font-size:14px; font-weight:900; }
+    .dots { display:flex; justify-content:center; gap:7px; margin-top:12px; }
+    .dot { width:7px; height:7px; padding:0; border:0; border-radius:50%; background:#c7ccdc; }
+    .dot.is-active { width:18px; border-radius:999px; background:var(--blue); }
+    .closing { background:#f8f9fc; }
+    .footer { padding:22px 18px calc(24px + env(safe-area-inset-bottom)); background:var(--blue); color:#fff; text-align:center; font-size:13px; font-weight:800; line-height:1.6; }
+    @media (min-width:680px) { .inner{padding:40px 28px;} .stage-strip{padding-inline:28px;} }
+  </style>
+  <style>
+    .stage-tab { display:flex; align-items:center; justify-content:center; min-height:44px; }
+    .dot { position:relative; width:26px; height:26px; background:transparent; }
+    .dot::before { content:""; position:absolute; left:50%; top:50%; width:7px; height:7px; border-radius:50%; background:#c7ccdc; transform:translate(-50%,-50%); }
+    .dot.is-active { width:30px; background:transparent; }
+    .dot.is-active::before { width:18px; border-radius:999px; background:var(--blue); }
+    @media (hover:none) { .stage-tab,.unit summary,.dot { -webkit-tap-highlight-color:rgba(26,62,191,.12); } }
+    @media (max-width:420px) { .inner{padding:24px 16px;} .stage-strip{gap:6px; padding:8px 10px;} .stage-tab{min-width:66px; padding:8px 10px; font-size:13px;} .meta-grid{grid-template-columns:1fr; gap:7px;} .meta-item{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px;} h2{font-size:20px;} .lead{font-size:17px;} .footer{padding-inline:16px; font-size:12px;} }
+  </style>
+</head>
+<body>
+  <nav class="stage-nav" aria-label="课程阶段切换"><div class="stage-strip"><a class="stage-tab" href="stage-a.html">认知段</a><a class="stage-tab" href="stage-b.html">发现段</a><a class="stage-tab is-active" href="stage-c.html">探索段</a><a class="stage-tab" href="stage-d.html">应用段</a><a class="stage-tab" href="stage-e.html">创造段</a></div></nav>
+  <header class="intro"><div class="inner">
+    <div class="brand-mark">INTERESTING ART STUDIO</div>
+    <h1>综合绘画班</h1>
+    <p class="lead">开始认真看东西了。</p>
+    <div class="meta-grid" aria-label="课程基本信息"><div class="meta-item"><span class="meta-label">适合年龄</span><span class="meta-value">约8–10岁</span></div><div class="meta-item"><span class="meta-label">课程阶段</span><span class="meta-value">C级课程</span></div><div class="meta-item"><span class="meta-label">单节时间</span><span class="meta-value">90分钟</span></div></div>
+    <div class="intro-block"><h2>先简单介绍一下我们</h2><p>有趣儿童美学，2017年开始在南宁做儿童美术教育。</p><p>这几年做下来，我们越来越确定一件事：孩子学美术，不是为了画出一张"看起来很像"的画。</p><p>真正重要的是，孩子能不能学会观察。能不能发现生活里的美。能不能慢慢有自己的判断，然后用画面说出来。</p><p>所以在有趣，你很少会看到一排整整齐齐的"同款作品"。</p><p>我们不靠模板画。也不把照着范画复制，当成主要教学方式。</p><p>老师会带孩子看真实的生活、真实的物体、真实的颜色，再进入创作。每个孩子最后画出来的东西，可能不一样，甚至有点奇怪，但里面一定要有他自己的观察和想法。</p><p>我们一直觉得，想带给孩子好的审美，画室本身先要有审美。</p><p>这不是一句口号。这是我们九年来做课程、做空间、做活动、做每一次作品呈现时，都在坚持的标准。</p></div>
+    <div class="intro-block"><h2>我们的课程怎么分？</h2><p>有趣的长期课程按年龄和能力，分为5个阶段、22个级别。</p><p>每个孩子入班前，老师会根据年龄、绘画经验、专注力、表达状态来判断适合的阶段，不是简单按年级塞进班里。</p></div>
+    <div class="intro-block"><h2>我们怎么上课？</h2><p>每学期约4个课程单元，18–20节课。</p><p>课程内容大多来自孩子真实能感受到的东西：动物、城市、节日、生活小物、旅行见闻、自然观察、人物故事。</p><p>课堂不是老师发一张范画，孩子照着画。</p><p>我们通常会先带孩子看、讨论、拆解：今天画的是什么？哪里最有意思？画面里谁是主角？颜色想表达什么感觉？材料可以怎么用？</p><p>孩子理解了，再开始创作。</p><p>他们会接触水彩、水墨、线描、版画、拼贴、粘土、装置、iPad板绘、动画、3D打印等不同形式。</p><p>我们希望孩子学到的，不是一种固定画法。而是面对不同主题时，知道自己可以怎么观察、怎么选择、怎么表达。</p></div>
+    <div class="intro-block"><h2>我们不做什么？</h2><p>我们不教简笔画。不让孩子长期照着范画复制。不追求所有孩子画得整齐、统一、像。不把"出效果很快"放在第一位。</p><p>因为模板画看起来很快，家长也容易觉得"哇，画得真好"。但孩子离开范画之后，可能就不知道怎么画了。这不是我们想要的结果。</p><p>我们更在意的是：孩子能不能慢慢拥有自己的判断。</p><p>他知道哪里好看。知道为什么这样搭颜色。知道自己想表达什么。面对一张空白纸的时候，不是第一句就问："老师，我照哪张画？"</p><p>这个东西，才是真正长在孩子身上的能力。</p></div>
+  </div></header>
+  <main>
+    <section class="content-section"><div class="inner"><h2>当前阶段课程详情</h2><h3>这个阶段最重要的事</h3><p class="section-note">开始认真看东西了。</p><p>8–10岁的孩子，观察力会明显变强。这个阶段我们会加入更多真实物体写生，让孩子从"我想象中是什么样"，慢慢走向"我看到的东西到底是什么样"。</p><p>但我们不会把写生做成死板训练。我们会让孩子观察真实物体，也保留自己的创作空间。</p><p>一盏煤油灯、一个旧磁带、一个笔袋、一组茶具、一只动物、一件有年代感的小物件。孩子会慢慢发现：原来同一个东西，可以用完全不同的方式画出来。</p></div></section>
+    <section class="content-section"><div class="inner"><h2>孩子会学什么？</h2><div class="unit-list">
+      <details class="unit"><summary><span class="unit-title">线描写生</span><span class="unit-brief">学习用线条观察和表现物体。</span></summary><div class="unit-detail">不是简单描轮廓，而是看结构、看转折、看细节。孩子会开始理解：线条也有轻重、疏密和节奏。</div></details>
+      <details class="unit"><summary><span class="unit-title">色彩运用</span><span class="unit-brief">学习用颜色表现物体的变化和体积感。</span></summary><div class="unit-detail">这个阶段，孩子会第一次比较认真地接触"立体感"。比如一个杯子哪里亮，哪里暗；一个水果的颜色为什么不是一整块平涂。</div></details>
+      <details class="unit"><summary><span class="unit-title">水墨线描</span><span class="unit-brief">从写生观察出发，用水墨表现不同质感。</span></summary><div class="unit-detail">干一点的笔触，湿一点的墨色，落在纸上是不一样的。孩子会在这个过程中，建立对材料和质感的敏感度。</div></details>
+      <details class="unit"><summary><span class="unit-title">版画运用</span><span class="unit-brief">了解纸板版画的制作逻辑。</span></summary><div class="unit-detail">孩子会从画一张画，进入到"设计一张可以印出来的画"。这会让他们重新理解形状、黑白关系和画面构成。</div></details>
+    </div><div class="gallery" data-carousel><div class="gallery-track" aria-label="作品横向滑动画廊"><div class="art-card"><span>综合绘画班作品 01</span></div><div class="art-card"><span>综合绘画班作品 02</span></div><div class="art-card"><span>综合绘画班作品 03</span></div></div><div class="dots" aria-label="画廊位置指示"><button class="dot is-active" type="button" aria-label="查看第1张"></button><button class="dot" type="button" aria-label="查看第2张"></button><button class="dot" type="button" aria-label="查看第3张"></button></div></div></div></section>
+    <section class="content-section"><div class="inner"><h2>这个阶段的作品通常是什么样？</h2><p>画面开始有自己的味道。有的孩子线条很细密，有的孩子颜色很大胆，有的孩子会把真实物体画得有点复古、有点故事感。</p><p>这个阶段的作品，通常已经能明显看出孩子自己的偏好。</p></div></section>
+    <section class="content-section"><div class="inner"><h2>孩子会有什么变化？</h2><p>观察能力会变强。会开始注意细节、结构、材质。画面不再只靠想象，也开始有真实依据。</p><p>更重要的是，孩子会开始判断：哪个角度好看？哪里要画细一点？颜色可不可以换一种？</p><p>这是真的在用眼睛思考。</p></div></section>
+    <section class="closing"><div class="inner"><h2>写在最后</h2><p>有趣不是一间追求"快速出效果"的画室。</p><p>我们当然希望孩子画得越来越好。但我们更希望，孩子在长期学习里，慢慢长出自己的审美、判断和表达。</p><p>他能看见生活里的细节。能说出自己为什么喜欢。能面对一张空白纸，不慌，也不急着找范画。</p><p>这件事不快。但它很值得。</p></div></section>
+  </main>
+  <footer class="footer">有趣儿童美学 · INTERESTING ART STUDIO · 南宁 · 2017年至今</footer>
+  <script>document.querySelectorAll("[data-carousel]").forEach((carousel)=>{const track=carousel.querySelector(".gallery-track");const slides=Array.from(track.children);const dots=Array.from(carousel.querySelectorAll(".dot"));const setActive=()=>{const width=track.clientWidth||1;const index=Math.max(0,Math.min(slides.length-1,Math.round(track.scrollLeft/width)));dots.forEach((dot,dotIndex)=>dot.classList.toggle("is-active",dotIndex===index));};dots.forEach((dot,index)=>{dot.addEventListener("click",()=>slides[index].scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"}));});let timer=0;track.addEventListener("scroll",()=>{window.clearTimeout(timer);timer=window.setTimeout(setActive,80);},{passive:true});setActive();});</script>
+</body>
+</html>
